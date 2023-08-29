@@ -33,7 +33,7 @@ function run() {
     console.log(data);
     const agentTempDirectory = tl.getVariable('Agent.TempDirectory');
     const jsonReportFullPath = path.join(agentTempDirectory, `assa.log`);
-    tl.writeFile(jsonReportFullPath, "I am assa.");
+    tl.writeFile(jsonReportFullPath, "I am assaer.");
     var log = fs.readFileSync(jsonReportFullPath, 'utf8');
     console.log(log);
     tl.addAttachment('JSON_ATTACHMENT_TYPE', "assa.log", jsonReportFullPath);

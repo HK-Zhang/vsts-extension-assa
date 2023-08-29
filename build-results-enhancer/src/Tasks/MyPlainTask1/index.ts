@@ -11,7 +11,7 @@ function run() {
     const agentTempDirectory = tl.getVariable('Agent.TempDirectory');
     const jsonReportFullPath = path.join(agentTempDirectory!,`assa.log`);
 
-    tl.writeFile(jsonReportFullPath,"I am assa.")
+    tl.writeFile(jsonReportFullPath,"I am assaer.")
     var log = fs.readFileSync(jsonReportFullPath,'utf8');
     console.log(log);
 

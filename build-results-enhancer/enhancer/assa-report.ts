@@ -107,43 +107,107 @@ export class ASSAReportTab extends Controls.BaseControl {
         },
       };
 
-      console.log($container);
       chartService.createChart($container, chartOptions);
+
+      var $areacontainer = $("#areachart");
+      var areachartOptions: CommonChartOptions = {
+        hostOptions: {
+          height: 290,
+          width: 300,
+        },
+        chartType: "stackedArea",
+        series: [
+          {
+            name: "Completed",
+            data: [1, 3, 4, 3, 6, 1, 9, 0, 8, 11],
+          },
+          {
+            name: "Development",
+            data: [1, 1, 0, 3, 0, 2, 8, 9, 2, 8],
+          },
+          {
+            name: "Design",
+            data: [0, 0, 0, 6, 1, 1, 9, 9, 1, 9],
+            color: "#207752",
+          },
+          {
+            name: "On Deck",
+            data: [1, 2, 4, 5, 4, 2, 1, 7, 0, 6],
+          },
+        ],
+        xAxis: {
+          labelFormatMode: "dateTime_DayInMonth",
+          labelValues: [
+            "1/1/2016",
+            "1/2/2016",
+            "1/3/2016",
+            "1/4/2016",
+            "1/5/2016",
+            "1/6/2016",
+            "1/7/2016",
+            "1/8/2016",
+            "1/9/2016",
+            "1/10/2016",
+          ],
+        },
+      };
+      chartService.createChart($areacontainer, areachartOptions);
+
+      var $pivottablecontainer = $("#pivottable");
+      var pivottableOptions: CommonChartOptions = {
+        hostOptions: {
+          height: 290,
+          width: 300,
+        },
+        chartType: "table",
+        xAxis: {
+          labelValues: ["Design", "In Progress", "Resolved", "Total"],
+        },
+        yAxis: {
+          labelValues: ["P1", "P2", "P3", "Total"],
+        },
+        series: [
+          {
+            name: "Design",
+            data: [
+              [0, 0, 1],
+              [0, 1, 2],
+              [0, 2, 3],
+            ],
+          },
+          {
+            name: "In Progress",
+            data: [
+              [1, 0, 4],
+              [1, 1, 5],
+              [1, 2, 6],
+            ],
+          },
+          {
+            name: "Resolved",
+            data: [
+              [2, 0, 7],
+              [2, 1, 8],
+              [2, 2, 9],
+            ],
+          },
+          {
+            name: "Total",
+            data: [
+              [3, 0, 12],
+              [3, 1, 15],
+              [3, 2, 18],
+              [0, 3, 6],
+              [1, 3, 15],
+              [2, 3, 24],
+              [3, 3, 10],
+            ],
+            color: "rgba(255,255,255,0)",
+          },
+        ],
+      };
+      chartService.createChart($pivottablecontainer, pivottableOptions);
     });
-
-    // VSS.register("build-builtin-task-dependent-tab", function () {
-    //   return {
-    //     load: function () {
-    //       return ChartsServices.ChartsService.getService().then(function (
-    //         chartService
-    //       ) {
-    //         var $container = $("#chart");
-    //         var chartOptions: CommonChartOptions = {
-    //           hostOptions: {
-    //             height: 290,
-    //             width: 300,
-    //           },
-    //           chartType: "pie",
-    //           series: [
-    //             {
-    //               data: [11, 4, 3, 1],
-    //             },
-    //           ],
-    //           xAxis: {
-    //             labelValues: ["Design", "On Deck", "Completed", "Development"],
-    //           },
-    //           specializedOptions: {
-    //             showLabels: true,
-    //             size: "200",
-    //           },
-    //         };
-
-    //         chartService.createChart($container, chartOptions);
-    //         return WidgetHelpers.WidgetStatusHelper.Success();
-    //       });
-    //     },
-    //   };
-    // });
   }
 }
 
