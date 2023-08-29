@@ -1,7 +1,10 @@
 import * as Controls from "VSS/Controls";
 import * as TFSBuildContracts from "TFS/Build/Contracts";
 import * as TFSBuildExtensionContracts from "TFS/Build/ExtensionContracts";
+import * as ChartsServices from "Charts/Services";
 import * as DTClient from "TFS/DistributedTask/TaskRestClient";
+import * as WidgetHelpers from "TFS/Dashboards/WidgetHelpers";
+import { CommonChartOptions } from "Charts/Contracts";
 
 const BUILD_PHASE = "build";
 const HTML_ATTACHMENT_TYPE = "HTML_ATTACHMENT_TYPE";
@@ -19,6 +22,7 @@ export class ASSAReportTab extends Controls.BaseControl {
 
   public initialize = (): void => {
     super.initialize();
+    WidgetHelpers.IncludeWidgetStyles();
     // Get configuration that's shared between extension and the extension host
     const sharedConfig: TFSBuildExtensionContracts.IBuildResultsViewExtensionConfig =
       VSS.getConfiguration();
@@ -56,7 +60,12 @@ export class ASSAReportTab extends Controls.BaseControl {
                 JSON_ATTACHMENT_TYPE,
                 attachmentName
               ).then((content) => {
-                console.log(new TextDecoder('utf-8').decode(new DataView(content)));
+                console.log(
+                  new TextDecoder("utf-8").decode(new DataView(content))
+                );
+                this._renderReport(
+                  new TextDecoder("utf-8").decode(new DataView(content))
+                );
                 //   const json = JSON.parse(
                 //     new TextDecoder('utf-8').decode(new DataView(content)),
                 //   );
@@ -67,12 +76,75 @@ export class ASSAReportTab extends Controls.BaseControl {
 
             //     console.log(taskAttachment)
             //   });
-
-
           });
       });
     }
   };
+
+  private _renderReport(content: string) {
+    var element = $("<pre />");
+    element.text(content);
+    this._element.append(element);
+    ChartsServices.ChartsService.getService().then(function (chartService) {
+      var $container = $("#chart");
+      var chartOptions: CommonChartOptions = {
+        hostOptions: {
+          height: 290,
+          width: 300,
+        },
+        chartType: "pie",
+        series: [
+          {
+            data: [11, 4, 3, 1],
+          },
+        ],
+        xAxis: {
+          labelValues: ["Design", "On Deck", "Completed", "Development"],
+        },
+        specializedOptions: {
+          showLabels: true,
+          size: "200",
+        },
+      };
+
+      console.log($container);
+      chartService.createChart($container, chartOptions);
+    });
+
+    // VSS.register("build-builtin-task-dependent-tab", function () {
+    //   return {
+    //     load: function () {
+    //       return ChartsServices.ChartsService.getService().then(function (
+    //         chartService
+    //       ) {
+    //         var $container = $("#chart");
+    //         var chartOptions: CommonChartOptions = {
+    //           hostOptions: {
+    //             height: 290,
+    //             width: 300,
+    //           },
+    //           chartType: "pie",
+    //           series: [
+    //             {
+    //               data: [11, 4, 3, 1],
+    //             },
+    //           ],
+    //           xAxis: {
+    //             labelValues: ["Design", "On Deck", "Completed", "Development"],
+    //           },
+    //           specializedOptions: {
+    //             showLabels: true,
+    //             size: "200",
+    //           },
+    //         };
+
+    //         chartService.createChart($container, chartOptions);
+    //         return WidgetHelpers.WidgetStatusHelper.Success();
+    //       });
+    //     },
+    //   };
+    // });
+  }
 }
 
-ASSAReportTab.enhance(ASSAReportTab, $("#task-contribution"), {});
+ASSAReportTab.enhance(ASSAReportTab, $(".task-contribution"), {});
