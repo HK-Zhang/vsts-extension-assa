@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple extension that demonstrates how to extend build summary page.",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && tsc -p ./enhancer/tsconfig.json",
     "postbuild": "npm run package",
     "package": "tfx extension create",
     "clean": "rimraf ./dist && rimraf ./*.vsix"

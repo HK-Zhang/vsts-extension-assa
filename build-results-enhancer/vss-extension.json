@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "assa-build-results-enhancer",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "name": "Build Results Enhancer",
     "description": "A simple extension that demonstrates how to extend build summary page.",
     "publisher": "hkzhang",
