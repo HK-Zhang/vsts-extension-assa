@@ -1,30 +1,21 @@
 {
     "id": "7d7d4c9d-845c-423a-a91d-ddf596fe8f6c",
-    "name": "MyPlainTask1",
-    "friendlyName": "MyPlainTask1",
-    "description": "MyPlainTask1",
-    "helpMarkDown": "[More Information](http://go.microsoft.com/fwlink/?LinkID=613724)",
-    "category": "Build",
+    "name": "ASSAReader",
+    "friendlyName": "ASSAReader",
+    "description": "ASSAReader",
+    "helpMarkDown": "[More Information](https://github.com/HK-Zhang/vsts-extension-assa)",
+    "category": "Tool",
     "visibility": [
                 "Build"
                   ],    
-    "author": "Microsoft Corporation",
+    "author": "He Ke Henry Zhang",
+    "preview":true,
     "version": {
         "Major": 2,
         "Minor": 0,
-        "Patch": 24
+        "Patch": 31
     },
-    "demands" : [
-        "msbuild"
-    ],
     "minimumAgentVersion": "1.99.0",
-    "groups": [
-        {
-            "name":"advanced",
-            "displayName":"Advanced",
-            "isExpanded":false
-        }
-    ],
     "inputs": [
         { 
             "name": "assaPath", 
@@ -35,7 +26,7 @@
             "helpMarkDown": "Relative path from repo root of the ASSA yml file to run."  
         }
     ],
-    "instanceNameFormat": "Build solution $(solution)",
+    "instanceNameFormat": "Read ASSA file",
     "execution": {
         "Node": {
             "target": "$(currentDirectory)\\index.js",
