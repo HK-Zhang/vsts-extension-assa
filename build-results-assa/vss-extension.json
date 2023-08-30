@@ -1,19 +1,19 @@
 {
     "manifestVersion": 1,
     "id": "assa-build-results-enhancer",
-    "version": "0.0.24",
-    "name": "Build Results Enhancer",
-    "description": "A simple extension that demonstrates how to extend build summary page.",
+    "version": "0.0.31",
+    "name": "ASSA Report",
+    "description": "A simple extension that demonstrates ASSA summary page.",
     "publisher": "hkzhang",
     "public": false,
     "icons": {
-        "default": "images/fabrikam-logo.png"
+        "default": "images/extension-icon.png"
     },    
     "tags": [
         "Build"
     ],
-     "scopes": [
-        "vso.build_execute"
+    "scopes": [
+        "vso.build"
     ],
     "categories": [
         "Azure Pipelines"
@@ -34,13 +34,13 @@
             "packagePath": "scripts"
         },
         {
-            "path": "builtInTaskContribution.html",
+            "path": "AssaReport.html",
             "addressable": true
         },
         {
-            "path": "src/Tasks/MyPlainTask1",
+            "path": "src/Tasks/ASSAReader",
             "addressable": true,
-            "packagePath": "Tasks/MyPlainTask1"
+            "packagePath": "Tasks/ASSAReader"
         },                  
         {
             "path": "node_modules/vss-web-extension-sdk/lib",
@@ -49,31 +49,31 @@
         },              
         {
             "path": "node_modules",
-            "packagePath": "Tasks/MyPlainTask1/node_modules"
+            "packagePath": "Tasks/ASSAReader/node_modules"
         }        
     ],
     "contributions": [
         {
             "id": "build-builtin-task-dependent-tab",
             "type": "ms.vss-build-web.build-results-tab",
-            "description": "A tab contributing to build results view and depends on Cmdline task",
+            "description": "A tab to show ASSA Report in build summary page.",
             "targets": [
                 "ms.vss-build-web.build-results-view"
             ],
             "properties": {
-                "name": "ASSA Tab",
-                 "uri": "builtInTaskContribution.html",
+                "name": "ASSA Report",
+                 "uri": "AssaReport.html",
                  "supportsTasks": ["7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"]
             }
         },
         {
-            "id": "MyPlainTask1",
+            "id": "ASSAReader",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "Tasks/MyPlainTask1"
+                "name": "Tasks/ASSAReader"
             }
         }
     ]
