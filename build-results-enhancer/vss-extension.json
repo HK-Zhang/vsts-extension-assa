@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "assa-build-results-enhancer",
-    "version": "0.0.1",
+    "version": "0.0.24",
     "name": "Build Results Enhancer",
     "description": "A simple extension that demonstrates how to extend build summary page.",
     "publisher": "hkzhang",
@@ -29,54 +29,30 @@
             "addressable": true          
         },
         {
-            "path": "dist",
+            "path": "enhancer",
             "addressable": true,
             "packagePath": "scripts"
-        },
-        {
-            "path": "buildDumpSection.html",
-            "addressable": true
-        },
-        {
-            "path": "infoTab.html",
-            "addressable": true
-        },
-        {
-            "path": "statusSection.html",
-            "addressable": true
         },
         {
             "path": "builtInTaskContribution.html",
             "addressable": true
         },
         {
-            "path": "taskContribution.html",
-            "addressable": true
-        },
-        {
-            "path": "src/Tasks",
+            "path": "src/Tasks/MyPlainTask1",
             "addressable": true,
-            "packagePath": "Tasks"
+            "packagePath": "Tasks/MyPlainTask1"
         },                  
         {
             "path": "node_modules/vss-web-extension-sdk/lib",
             "addressable": true,
             "packagePath": "lib"
+        },              
+        {
+            "path": "node_modules",
+            "packagePath": "Tasks/MyPlainTask1/node_modules"
         }        
     ],
     "contributions": [
-        {
-            "id": "build-info-tab",
-            "type": "ms.vss-build-web.build-results-tab",
-            "description": "A tab contributing to build results view",
-            "targets": [
-                "ms.vss-build-web.build-results-view"
-            ],
-            "properties": {
-                "name": "Custom Tab",
-                 "uri": "infoTab.html"
-            }
-        },
         {
             "id": "build-builtin-task-dependent-tab",
             "type": "ms.vss-build-web.build-results-tab",
@@ -85,38 +61,9 @@
                 "ms.vss-build-web.build-results-view"
             ],
             "properties": {
-                "name": "Cmdline Tab",
+                "name": "ASSA Tab",
                  "uri": "builtInTaskContribution.html",
-                 "supportsTasks": ["D9BAFED4-0B18-4F58-968D-86655B4D2CE9"]
-            }
-        },
-        {
-            "id": "build-status-section",
-            "type": "ms.vss-build-web.build-results-section",
-            "description": "A section contributing to our own new tab and also to existing build 'summary' tab",
-            "targets": [
-                ".build-info-tab",
-                "ms.vss-build-web.build-results-summary-tab"
-            ],
-            "properties": {
-                 "name": "Custom Section",
-                 "uri": "statusSection.html",
-                 "order": 20,
-                 "height": 310
-            }
-        },
-        {
-            "id": "build-dump-section",
-            "type": "ms.vss-build-web.build-results-section",
-            "description": "A section contributing to our own new tab",
-            "targets": [
-                ".build-info-tab"
-            ],
-            "properties": {
-                 "name": "Custom Section 2",
-                 "uri": "buildDumpSection.html",
-                 "order": 10,
-                 "height": 500
+                 "supportsTasks": ["7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"]
             }
         },
         {
@@ -127,38 +74,6 @@
             ],
             "properties": {
                 "name": "Tasks/MyPlainTask1"
-            }
-        },
-        {
-            "id": "build-contribution-task-dependent-section",
-            "type": "ms.vss-build-web.build-results-section",
-            "description": "A section depending on myplaintask contributing to our own new tab and also to existing build 'summary' tab",
-            "targets": [
-                ".build-info-tab",
-                "ms.vss-build-web.build-results-summary-tab"
-            ],
-            "properties": {
-                 "name": "MyPlainTaskSection",
-                 "uri": "taskContribution.html",
-                 "order": 20,
-                 "height": 30,
-                 "supportsTasks": ["7c939663-33ca-4cb6-9b8c-6e164d446eea"]
-            }
-        },
-        {
-            "id": "build-builtin-task-dependent-section",
-            "type": "ms.vss-build-web.build-results-section",
-            "description": "A section depending on cmdline contributing to our own new tab and also to existing build 'summary' tab",
-            "targets": [
-                ".build-info-tab",
-                "ms.vss-build-web.build-results-summary-tab"
-            ],
-            "properties": {
-                 "name": "CmdLineTaskSection",
-                 "uri": "builtInTaskContribution.html",
-                 "order": 20,
-                 "height": 30,
-                 "supportsTasks": ["D9BAFED4-0B18-4F58-968D-86655B4D2CE9"]
             }
         }
     ]
