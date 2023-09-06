@@ -1,80 +1,57 @@
 {
-    "manifestVersion": 1,
-    "id": "assa-build-results-enhancer",
-    "version": "0.0.31",
-    "name": "ASSA Report",
-    "description": "A simple extension that demonstrates ASSA summary page.",
-    "publisher": "hkzhang",
-    "public": false,
-    "icons": {
-        "default": "images/extension-icon.png"
-    },    
-    "tags": [
-        "Build"
-    ],
-    "scopes": [
-        "vso.build"
-    ],
-    "categories": [
-        "Azure Pipelines"
-    ],   
-    "targets": [
-        {
-            "id": "Microsoft.VisualStudio.Services"
-        }
-    ],
-    "files": [
-        {
-            "path": "images",
-            "addressable": true          
-        },
-        {
-            "path": "enhancer",
-            "addressable": true,
-            "packagePath": "scripts"
-        },
-        {
-            "path": "AssaReport.html",
-            "addressable": true
-        },
-        {
-            "path": "src/Tasks/ASSAReader",
-            "addressable": true,
-            "packagePath": "Tasks/ASSAReader"
-        },                  
-        {
-            "path": "node_modules/vss-web-extension-sdk/lib",
-            "addressable": true,
-            "packagePath": "lib"
-        },              
-        {
-            "path": "node_modules",
-            "packagePath": "Tasks/ASSAReader/node_modules"
-        }        
-    ],
-    "contributions": [
-        {
-            "id": "build-builtin-task-dependent-tab",
-            "type": "ms.vss-build-web.build-results-tab",
-            "description": "A tab to show ASSA Report in build summary page.",
-            "targets": [
-                "ms.vss-build-web.build-results-view"
-            ],
-            "properties": {
-                "name": "ASSA Report",
-                 "uri": "AssaReport.html",
-                 "supportsTasks": ["7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"]
-            }
-        },
-        {
-            "id": "ASSAReader",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "Tasks/ASSAReader"
-            }
-        }
-    ]
+  "manifestVersion": 1,
+  "id": "assa-build-results-enhancer",
+  "version": "0.0.32",
+  "name": "ASSA Report",
+  "description": "A simple extension that demonstrates ASSA summary page.",
+  "publisher": "hkzhang",
+  "public": false,
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "tags": ["Build"],
+  "scopes": ["vso.build"],
+  "categories": ["Azure Pipelines"],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "files": [
+    {
+      "path": "images",
+      "addressable": true
+    },
+    {
+      "path": "dist",
+      "addressable": true
+    },
+    {
+      "path": "src/buildExtensions/ASSAReader",
+      "addressable": true,
+      "packagePath": "dist/ASSAReader"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "build-builtin-task-dependent-tab",
+      "type": "ms.vss-build-web.build-results-tab",
+      "description": "A tab to show ASSA Report in build summary page.",
+      "targets": ["ms.vss-build-web.build-results-view"],
+      "properties": {
+        "name": "ASSA Report",
+        "uri": "dist/AssaReport/AssaReport.html",
+        "supportsTasks": ["7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"]
+      }
+    },
+    {
+      "id": "ASSAReader",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"],
+      "properties": {
+        "name": "Tasks/ASSAReader",
+        "uri": "dist/ASSAReader/ASSAReader.js"
+      }
+    }
+  ]
 }

@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "build pipeline task extension and custom build summary page.",
   "scripts": {
-    "build": "tsc -p . && tsc -p ./enhancer/tsconfig.json",
     "postbuild": "npm run package",
     "package": "tfx extension create",
-    "clean": "rimraf ./dist && rimraf ./*.vsix"
+    "clean": "rimraf ./dist",
+    "compile": "npm run clean && webpack --mode production",
+    "build": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,27 @@
   "author": "Microsoft",
   "dependencies": {
     "azure-pipelines-task-lib": "^4.3.1",
-    "vss-web-extension-sdk": "^4.126.2"
+    "azure-devops-extension-sdk": "^3.1.2",
+    "vss-web-extension-sdk": "^4.126.2",
+    "azure-devops-ui": "^2.167.63",
+    "react": "~16.13.1",
+    "react-dom": "~16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@testing-library/react": "^10.4.4",
+    "@types/react": "~16.8.2",
+    "@types/react-dom": "~16.8.0",
+    "base64-inline-loader": "^2.0.1",
+    "copy-webpack-plugin": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "rimraf": "~2.6.2",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.0.0",
+    "style-loader": "~0.23.1",
+    "ts-loader": "~5.2.2",
+    "webpack": "^5.23.0",
+    "webpack-cli": "^4.5.0"
   }
 }
