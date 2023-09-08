@@ -19,19 +19,13 @@ module.exports = {
   output: {
     filename: "[name]/[name].js",
   },
-  externals:[/^TFS\//, /^VSS\//, /^Charts\//],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
-    // alias: {
-    //   "TFS/Dashboards/WidgetHelpers": false,
-    //   "Charts/Services":false,
-    //   "TFS/DistributedTask/TaskRestClient":false,
-    // },
-    // fallback: {
-    //   "TFS/Dashboards/WidgetHelpers": false,
-    //   "Charts/Services": false,
-    //   "TFS/DistributedTask/TaskRestClient": false,
-    // },
+    alias: {
+      "azure-devops-extension-sdk": path.resolve(
+        "node_modules/azure-devops-extension-sdk"
+      ),
+    },
   },
   stats: {
     warnings: false,

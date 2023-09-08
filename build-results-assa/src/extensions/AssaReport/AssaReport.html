@@ -1,30 +1,8 @@
 ﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <script src="lib/VSS.SDK.min.js"></script>
-    <script type="text/javascript">
-        VSS.init({
-            explicitNotifyLoaded: true,
-            usePlatformScripts: true,
-            usePlatformStyles: true,
-            moduleLoaderConfig: {
-                paths: {
-                    enhancer: 'dist/AssaReport/AssaReport',
-                },
-            },
-        });
-
-        VSS.ready(function () {
-            VSS.require(['dist/AssaReport/AssaReport'], function () { });
-        }); 
-    </script>
-</head>
-
-<body>
-    <div id="root"></div>
-    <!-- <script type="text/javascript" src="AssaReport.js" charset="utf-8"></script> -->
-</body>
-
+    <body>
+        <div id="root"></div>
+        <script type="text/javascript" src="AssaReport.js" charset="utf-8"></script>
+    </body>
 </html>

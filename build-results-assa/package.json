@@ -6,7 +6,7 @@
     "postbuild": "npm run package",
     "package": "tfx extension create",
     "clean": "rimraf ./dist",
-    "compile": "npm run clean && webpack -c webpack.config.js --mode development && webpack -c webpack.node.config.js --mode production",
+    "compile": "npm run clean && webpack -c webpack.config.js --mode production && webpack -c webpack.node.config.js --mode production",
     "build": "npm run compile"
   },
   "repository": {
@@ -34,7 +34,7 @@
     "rimraf": "~2.6.2",
     "sass": "^1.62.1",
     "sass-loader": "^13.0.0",
-    "style-loader": "~0.23.1",
+    "style-loader": "^3.3.1",
     "ts-loader": "~5.2.2",
     "webpack": "^5.23.0",
     "webpack-cli": "^4.5.0"
