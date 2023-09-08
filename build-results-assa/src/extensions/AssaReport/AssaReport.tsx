@@ -22,13 +22,13 @@ class AssaReportContent extends React.Component<{}, {}> {
   };
 
   public componentDidMount() {
-    VSS.init({
-      explicitNotifyLoaded: true,
-      usePlatformScripts: true,
-      usePlatformStyles: true,
-    });
-
-    VSS.ready(() => this.initializeState());
+    // VSS.init({
+    //   explicitNotifyLoaded: true,
+    //   usePlatformScripts: true,
+    //   usePlatformStyles: true,
+    // });
+        // VSS.ready(() => this.initializeState());
+    this.initializeState();
   }
 
   private initializeState() {

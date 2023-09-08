@@ -13,7 +13,7 @@
     "version": {
         "Major": 2,
         "Minor": 0,
-        "Patch": 32
+        "Patch": 48
     },
     "minimumAgentVersion": "1.99.0",
     "inputs": [
@@ -29,7 +29,7 @@
     "instanceNameFormat": "Read ASSA file",
     "execution": {
         "Node": {
-            "target": "$(currentDirectory)\\index.js",
+            "target": "$(currentDirectory)\\ASSAReader.js",
             "argumentFormat": "",
             "workingDirectory": "$(currentDirectory)"
         }

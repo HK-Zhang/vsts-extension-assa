@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "assa-build-results-enhancer",
-  "version": "0.0.32",
+  "version": "0.0.48",
   "name": "ASSA Report",
   "description": "A simple extension that demonstrates ASSA summary page.",
   "publisher": "hkzhang",
@@ -27,6 +27,11 @@
       "addressable": true
     },
     {
+      "path": "node_modules/vss-web-extension-sdk/lib",
+      "addressable": true,
+      "packagePath": "dist/AssaReport/lib"
+    },
+    {
       "path": "src/buildExtensions/ASSAReader",
       "addressable": true,
       "packagePath": "dist/ASSAReader"
@@ -49,8 +54,7 @@
       "type": "ms.vss-distributed-task.task",
       "targets": ["ms.vss-distributed-task.tasks"],
       "properties": {
-        "name": "Tasks/ASSAReader",
-        "uri": "dist/ASSAReader/ASSAReader.js"
+        "name": "dist/ASSAReader"
       }
     }
   ]

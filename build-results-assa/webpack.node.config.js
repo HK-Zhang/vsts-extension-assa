@@ -6,32 +6,23 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const entries = {};
 
 // Loop through subfolders in the "Samples" folder and add an entry for each one
-const extensionsDir = path.join(__dirname, "src/extensions");
-fs.readdirSync(extensionsDir).filter((dir) => {
-  if (fs.statSync(path.join(extensionsDir, dir)).isDirectory()) {
+const buildExtensionsDir = path.join(__dirname, "src/buildExtensions");
+fs.readdirSync(buildExtensionsDir).filter((dir) => {
+  if (fs.statSync(path.join(buildExtensionsDir, dir)).isDirectory()) {
     entries[dir] =
-      "./" + path.relative(process.cwd(), path.join(extensionsDir, dir, dir));
+      "./" +
+      path.relative(process.cwd(), path.join(buildExtensionsDir, dir, dir));
   }
 });
 
 module.exports = {
+  target: 'node',
   entry: entries,
   output: {
     filename: "[name]/[name].js",
   },
-  externals:[/^TFS\//, /^VSS\//, /^Charts\//],
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
-    // alias: {
-    //   "TFS/Dashboards/WidgetHelpers": false,
-    //   "Charts/Services":false,
-    //   "TFS/DistributedTask/TaskRestClient":false,
-    // },
-    // fallback: {
-    //   "TFS/Dashboards/WidgetHelpers": false,
-    //   "Charts/Services": false,
-    //   "TFS/DistributedTask/TaskRestClient": false,
-    // },
+    extensions: [".ts", ".tsx", ".js"]
   },
   stats: {
     warnings: false,
@@ -68,10 +59,5 @@ module.exports = {
         loader: "file-loader",
       },
     ],
-  },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [{ from: "**/*.html", context: "src/extensions" }],
-    }),
-  ],
+  }
 };

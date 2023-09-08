@@ -6,7 +6,7 @@
     "postbuild": "npm run package",
     "package": "tfx extension create",
     "clean": "rimraf ./dist",
-    "compile": "npm run clean && webpack --mode production",
+    "compile": "npm run clean && webpack -c webpack.config.js --mode development && webpack -c webpack.node.config.js --mode production",
     "build": "npm run compile"
   },
   "repository": {
