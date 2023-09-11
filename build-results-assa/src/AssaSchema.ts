@@ -415,7 +415,7 @@ const AssaSchema = {
       id: "7f55e440-7349-4943-b42f-f830573f00a3",
       ref: "3.1.2",
       mandatory: true,
-    }
+    },
   ],
 };
 
@@ -426,8 +426,1905 @@ export const ControlRelevanceTable = {
       threadEvent: "Session hijacking",
       measurement: [
         {
-          control: "7e768b87-44ca-48e9-9f5e-c67bca160550",
-          score: 0,
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 1,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 1,
+        },
+      ],
+    },
+    {
+      threadEvent:
+        "Unauthorised access to legitimate authentication credentials",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.3",
+          score: 4,
+        },
+        {
+          controlRef: "1.2.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.3",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.7",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.8",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 2,
+        },
+        {
+          controlRef: "2.7.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.9",
+          score: 4,
+        },
+      ],
+    },
+    {
+      threadEvent: "Unauthorised access to data",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.6.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.7",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.9",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.10",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.8",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.13",
+          score: 3,
+        },
+        {
+          controlRef: "2.7.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.7",
+          score: 2,
+        },
+        {
+          controlRef: "2.7.9",
+          score: 4,
+        },
+      ],
+    },
+    {
+      threadEvent: "Exploit vulnerable authorisation mechanisms",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.5.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 1,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.7",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent:
+        "Unauthorised monitoring and/or modification of communications",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.8",
+          score: 1,
+        },
+        {
+          controlRef: "2.6.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.13",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent: "Conduct a denial of service (DoS) attack",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.9",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.14",
+          score: 3,
+        },
+      ],
+    },
+    {
+      threadEvent: "Introduce malware to information systems",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.5.3",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.4",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.14",
+          score: 3,
+        },
+      ],
+    },
+    {
+      threadEvent: "Exploit misconfigured organisational information systems",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.10",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.12",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.13",
+          score: 1,
+        },
+        {
+          controlRef: "2.7.6",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent: "Exploit poorly-designed network architecture",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 1,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.14",
+          score: 3,
+        },
+      ],
+    },
+    {
+      threadEvent: "Misuse of information systems",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.10",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.1",
+          score: 1,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.4.4",
+          score: 1,
+        },
+        {
+          controlRef: "2.4.5",
+          score: 1,
+        },
+        {
+          controlRef: "2.4.6",
+          score: 1,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.5.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.3",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.5.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.8",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.13",
+          score: 2,
+        },
+        {
+          controlRef: "2.7.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.7.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.7.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.7.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.7.7",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent: "Unauthorised network scanning and/or probing",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.12",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.14",
+          score: 3,
+        },
+      ],
+    },
+    {
+      threadEvent:
+        "Exploit vulnerabilities in an organisation's information systems",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.5.3",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.4",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.4",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.9",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.12",
+          score: 1,
+        },
+        {
+          controlRef: "2.6.13",
+          score: 2,
+        },
+        {
+          controlRef: "2.7.7",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent:
+        "Introducing unauthorised code into applications or software",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.5.3",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.4",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 1,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 4,
+        },
+        {
+          controlRef: "2.6.14",
+          score: 3,
+        },
+      ],
+    },
+    {
+      threadEvent: "Loss of information systems",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 1,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 2,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.3",
+          score: 4,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 1,
+        },
+        {
+          controlRef: "3.1.1",
+          score: 4,
+        },
+        {
+          controlRef: "3.1.2",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent: "Undesirable effects of change",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.1",
+          score: 4,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.3",
+          score: 2,
+        },
+      ],
+    },
+    {
+      threadEvent: "Misconfiguration",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.1",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.4",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.4",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.5",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 2,
+        },
+        {
+          controlRef: "2.3.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.5",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.6",
+          score: 3,
+        },
+        {
+          controlRef: "2.3.7",
+          score: 3,
+        },
+        {
+          controlRef: "2.4.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 3,
+        },
+      ],
+    },
+    {
+      threadEvent: "Software malfunction",
+      measurement: [
+        {
+          controlRef: "1.1.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.2",
+          score: 2,
+        },
+        {
+          controlRef: "1.2.5",
+          score: 3,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.4.1",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.4.4",
+          score: 2,
+        },
+        {
+          controlRef: "1.5.1",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.3",
+          score: 3,
+        },
+        {
+          controlRef: "1.5.4",
+          score: 3,
+        },
+        {
+          controlRef: "2.1.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.1.3",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.1",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.2",
+          score: 3,
+        },
+        {
+          controlRef: "2.2.3",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.4",
+          score: 1,
+        },
+        {
+          controlRef: "2.2.5",
+          score: 1,
+        },
+        {
+          controlRef: "2.4.7",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.1",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.2",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.5",
+          score: 1,
+        },
+        {
+          controlRef: "2.6.6",
+          score: 2,
+        },
+        {
+          controlRef: "2.6.10",
+          score: 1,
+        },
+        {
+          controlRef: "2.6.11",
+          score: 1,
+        },
+      ],
+    },
+    {
+      threadEvent: "Compliance violation",
+      measurement: [
+        {
+          controlRef: "1.1.3",
+          score: 4,
+        },
+        {
+          controlRef: "1.3.1",
+          score: 2,
+        },
+        {
+          controlRef: "1.3.2",
+          score: 4,
+        },
+        {
+          controlRef: "1.4.5",
+          score: 4,
+        },
+        {
+          controlRef: "1.5.2",
+          score: 4,
+        },
+        {
+          controlRef: "2.1.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.6",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.7",
+          score: 4,
+        },
+        {
+          controlRef: "2.2.8",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.9",
+          score: 4,
+        },
+        {
+          controlRef: "2.3.10",
+          score: 3,
+        },
+        {
+          controlRef: "2.7.1",
+          score: 4,
+        },
+        {
+          controlRef: "2.7.8",
+          score: 4,
         },
       ],
     },
