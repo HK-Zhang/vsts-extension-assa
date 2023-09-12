@@ -3,13 +3,31 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import yaml = require('js-yaml');
-import { Assa } from "./Assa";
+import { Assa, Status } from "../../type/Assa";
+import { AssaResult } from "../../type/AssaResult";
+
+
+function GenerateAssaResport(data: Assa): AssaResult {
+  let assaResult: AssaResult = {
+    assaVersion: data.assaVersion,
+    projectName: data.projectName,
+    projectVersion: data.projectVersion,
+    projectDescription: data.projectDescription,
+    owner: data.owner,
+    status: data.status,
+    ncControls: data.controls.filter(
+      (t) => t.status !== Status.C && t.status !== Status.Na
+    ),
+    complianceData: [],
+    threadEventScores: [],
+  };
+  return assaResult;
+}
 
 
 function run() {
     const assaPath = tl.getPathInput("assaPath",true);
     // const assaPath = "assa.yml"
-    console.log(assaPath);
     const assaData = yaml.load(fs.readFileSync(assaPath!, 'utf8')) as Assa;
 
     console.log(assaData);

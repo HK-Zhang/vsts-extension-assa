@@ -17,7 +17,7 @@ export interface Assa {
 export interface Control {
     id:          string;
     description: string;
-    status:      Status;
+    status:      null | Status;
     evidence:    null | string;
     responsible: string;
     workItemUrl: null | string;
@@ -29,6 +29,7 @@ export enum Status {
     Na = "NA",
     Nc = "NC",
     PC = "PC",
+    Td = ""
 }
 
 export interface Revision {
