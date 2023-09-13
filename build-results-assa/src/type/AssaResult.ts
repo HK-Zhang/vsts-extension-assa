@@ -26,4 +26,5 @@ export interface ComplianceData {
 export interface ThreadEventScore{
     threadEvent:string;
     score:number;
+    data: ComplianceCount[];
 }
