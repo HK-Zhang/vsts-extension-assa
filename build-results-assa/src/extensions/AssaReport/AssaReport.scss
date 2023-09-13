@@ -1,1 +1,23 @@
 @import "node_modules/azure-devops-ui/Core/_platformCommon.scss";
+
+.BarChart {
+    background-color: #2bc4bd;
+    border-radius: 6px;
+    display: flex;
+    flex-direction:row;
+    height: 16px;
+    width: inherit;
+    overflow: hidden;
+}
+
+.BarData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PercentText {
+    color: #ebeded;
+    font: 1rem;
+    text-align: center;
+}
