@@ -26,6 +26,26 @@ $pc-color: #f59e0b;
     color: $ip-color;
 }
 
+.border-l-C {
+    border-left: 2px solid $c-color;
+}
+
+.border-l-NA {
+    border-left: 2px solid $na-color;
+}
+
+.border-l-NC {
+    border-left: 2px solid $nc-color;
+}
+
+.border-l-IP {
+    border-left: 2px solid $ip-color;
+}
+
+.border-l-PC {
+    border-left: 2px solid $pc-color;
+}
+
 .BarChart {
     background-color: #2bc4bd;
     display: flex;

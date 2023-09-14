@@ -42,6 +42,8 @@ import {
 import { Spinner, SpinnerSize } from "azure-devops-ui/Spinner";
 import { ArrayItemProvider } from "azure-devops-ui/Utilities/Provider";
 import { Icon, IconSize } from "azure-devops-ui/Icon";
+import { Pill, PillSize, PillVariant } from "azure-devops-ui/Pill";
+import { PillGroup } from "azure-devops-ui/PillGroup";
 import { assaData } from "./data";
 import {
   AssaResult,
@@ -49,6 +51,8 @@ import {
   ComplianceData,
   ThreadEventScore,
 } from "../../type/AssaResult";
+import { ControlRelevanceTable } from "../../AssaSchema";
+import { Status } from "../../type/Assa";
 const JSON_ATTACHMENT_TYPE = "JSON_ATTACHMENT_TYPE";
 
 const responsibleStatusColumns = [
@@ -107,50 +111,14 @@ interface IResponsibleStatusTableItem extends ISimpleTableCell {
   IP: string;
 }
 
-interface ITaskItem {
+interface IControlItem {
   description: string;
-  iconName: string;
-  name: string;
+  id: string;
+  status: Status;
+  mandatory: boolean;
+  responsible: string;
+  threadEvent: string[];
 }
-
-const tasks: ITaskItem[] = [
-  {
-    description: "Build, test, package, or publish a dotnet application",
-    iconName: "Home",
-    name: ".NET Core",
-  },
-  {
-    description:
-      "Acquires a specific version of .NET Core from internal installer",
-    iconName: "Phone",
-    name: ".NET Core Tool Installer",
-  },
-  {
-    description: "Sign and align Android APK Files",
-    iconName: "Lock",
-    name: "Android Signing",
-  },
-  {
-    description: "Distribute app builds to testers and users via AppCenter",
-    iconName: "Globe",
-    name: "App Center Distribute",
-  },
-  {
-    description: "Test app packages with App Center",
-    iconName: "Home",
-    name: "App Center Test",
-  },
-  {
-    description: "Archive files using compression formats",
-    iconName: "Phone",
-    name: "Archive Files",
-  },
-  {
-    description: "Update Azure App Services on Windows, Web Applications, etc.",
-    iconName: "Lock",
-    name: "Azure App Service Deploy",
-  },
-];
 
 interface IAssaReportContentState {
   mandatory?: boolean;
@@ -210,8 +178,8 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
 
   private renderRow = (
     index: number,
-    item: ITaskItem,
-    details: IListItemDetails<ITaskItem>,
+    item: IControlItem,
+    details: IListItemDetails<IControlItem>,
     key?: string
   ): JSX.Element => {
     return (
@@ -220,16 +188,29 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
         index={index}
         details={details}
       >
-        <div className="list-example-row flex-row h-scroll-hidden">
-          <Icon iconName={item.iconName} size={IconSize.medium} />
+        <div
+          className={`list-example-row flex-row h-scroll-hidden border-l-${item.status}`}
+        >
           <div
             style={{ marginLeft: "10px", padding: "10px 0px" }}
             className="flex-column h-scroll-hidden"
           >
-            <span className="wrap-text">{item.name}</span>
-            <span className="fontSizeMS font-size-ms secondary-text wrap-text">
+            <div className="wrap-text" style={{ whiteSpace: "normal" }}>
               {item.description}
-            </span>
+            </div>
+            <div className="flex-row justify-space-between">
+              <span className="fontSizeMS font-size-ms secondary-text wrap-text">
+                {item.responsible}
+              </span>
+              <span className="fontSizeMS font-size-ms secondary-text wrap-text">
+                {item.threadEvent.length} thread events are impacted.
+              </span>
+              {/* <div>
+                <PillGroup className="flex-row">
+                  {item.threadEvent.map((t,idx)=>{<Pill key={`pill-item-${index}-${idx}`} size={PillSize.compact}>{t}</Pill>})}
+                </PillGroup>
+              </div> */}
+            </div>
           </div>
         </div>
       </ListItem>
@@ -266,31 +247,36 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
                 {
                   color: "#10b981",
                   percent:
-                    (item.data.find((t) => t.status === "C")?.count ?? 0) * 100 /
+                    ((item.data.find((t) => t.status === "C")?.count ?? 0) *
+                      100) /
                     totalCount,
                 },
                 {
                   color: "#ef4444",
                   percent:
-                    (item.data.find((t) => t.status === "NC")?.count ?? 0) * 100 /
+                    ((item.data.find((t) => t.status === "NC")?.count ?? 0) *
+                      100) /
                     totalCount,
                 },
                 {
                   color: "#f59e0b",
                   percent:
-                    (item.data.find((t) => t.status === "PC")?.count ?? 0) * 100 /
+                    ((item.data.find((t) => t.status === "PC")?.count ?? 0) *
+                      100) /
                     totalCount,
                 },
                 {
                   color: "#6b7280",
                   percent:
-                    (item.data.find((t) => t.status === "NA")?.count ?? 0) * 100 /
+                    ((item.data.find((t) => t.status === "NA")?.count ?? 0) *
+                      100) /
                     totalCount,
                 },
                 {
                   color: "#0ea5e9",
                   percent:
-                    (item.data.find((t) => t.status === "IP")?.count ?? 0) * 100 /
+                    ((item.data.find((t) => t.status === "IP")?.count ?? 0) *
+                      100) /
                     totalCount,
                 },
               ]}
@@ -386,15 +372,27 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
         })
       );
 
-    const iframeUrl = window.location.href;
-    const isV2 = window.location.search.indexOf("v2=true") >= 0;
-    const data = [
-      { color: "#10b981", percent: 20 },
-      { color: "#0ea5e9", percent: 10 },
-      { color: "#ef4444", percent: 20 },
-      { color: "#6b7280", percent: 31 },
-      { color: "#f59e0b", percent: 19 },
-    ];
+    const ncControls = new ArrayItemProvider<IControlItem>(
+      assaPageData?.ncControls
+        ?.filter((t) => this.state.mandatory === false || t.mandatory === true)
+        .map((item) => {
+          const newItem: IControlItem = {
+            id: item.id,
+            status: item.status!,
+            description: item.description,
+            mandatory: item.mandatory,
+            responsible: item.responsible,
+            threadEvent: ControlRelevanceTable.controlRelevance
+              .filter(
+                (t) =>
+                  t.measurement.findIndex((f) => f.controlRef === item.ref) > -1
+              )
+              .map((t) => t.threadEvent),
+          };
+          return newItem;
+        }) ?? []
+    );
+
     return (
       <Page className="sample-hub flex-grow">
         <Header title="ASSA Compliance Overview" titleSize={TitleSize.Large}>
@@ -444,6 +442,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
               />
             </Card>
             <Card
+              className="margin-top-16"
               titleProps={{
                 text: "Thread event scores",
                 ariaLevel: 3,
@@ -459,6 +458,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
               />
             </Card>
             <Card
+              className="margin-top-16"
               titleProps={{
                 text: "Controls to compliance",
                 ariaLevel: 3,
@@ -466,14 +466,13 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
             >
               <div style={{ display: "flex", height: "500px" }}>
                 <ScrollableList
-                  itemProvider={new ArrayItemProvider(tasks)}
+                  itemProvider={ncControls}
                   renderRow={this.renderRow}
                   selection={new ListSelection(true)}
                   width="100%"
                 />
               </div>
             </Card>
-            <p>iframe url: {iframeUrl}</p>
           </div>
         )}
         {!assaPageData && (
@@ -490,7 +489,7 @@ const Bar = ({ data }: { data: { color: string; percent: number }[] }) => {
   return (
     <div className="BarChart">
       {data &&
-        data.map((d,index) => {
+        data.map((d, index) => {
           return (
             <div
               key={`bar-${d.percent}-${index}`}
