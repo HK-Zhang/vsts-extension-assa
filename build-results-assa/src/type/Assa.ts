@@ -25,13 +25,15 @@ export interface Control {
   workItemUrl: null | string;
 }
 
-export enum Status {
-  C = "C",
-  IP = "IP",
-  Na = "NA",
-  Nc = "NC",
-  PC = "PC",
-}
+export type Status = "C" | "IP" | "NA" | "NC" | "PC"
+
+// export enum Status {
+//   C = "C",
+//   IP = "IP",
+//   Na = "NA",
+//   Nc = "NC",
+//   PC = "PC",
+// }
 
 export interface Revision {
   date: Date;

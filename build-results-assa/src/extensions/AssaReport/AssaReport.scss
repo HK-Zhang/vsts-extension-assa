@@ -1,11 +1,36 @@
 @import "node_modules/azure-devops-ui/Core/_platformCommon.scss";
 
+$c-color: #10b981;
+$na-color: #6b7280;
+$nc-color: #ef4444;
+$ip-color: #0ea5e9;
+$pc-color: #f59e0b;
+
+.color-C {
+    color: $c-color;
+}
+
+.color-NA {
+    color: $na-color;
+}
+
+.color-NC {
+    color: $nc-color;
+}
+
+.color-PC {
+    color: $pc-color;
+}
+
+.color-IP {
+    color: $ip-color;
+}
+
 .BarChart {
     background-color: #2bc4bd;
-    border-radius: 6px;
     display: flex;
-    flex-direction:row;
-    height: 16px;
+    flex-direction: row;
+    height: 2px;
     width: inherit;
     overflow: hidden;
 }

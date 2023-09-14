@@ -15,15 +15,158 @@ import * as React from "react";
 import { Header, TitleSize } from "azure-devops-ui/Header";
 import { Page } from "azure-devops-ui/Page";
 import { Card } from "azure-devops-ui/Card";
+import {
+  ColumnSorting,
+  ISimpleTableCell,
+  SortOrder,
+  Table,
+  TableColumnLayout,
+  renderSimpleCell,
+  sortItems,
+} from "azure-devops-ui/Table";
 import { showRootComponent } from "../Common";
 import { Toggle } from "azure-devops-ui/Toggle";
 import "./AssaReport.scss";
+import {
+  ObservableArray,
+  ObservableValue,
+} from "azure-devops-ui/Core/Observable";
+import {
+  IListItemDetails,
+  ISimpleListCell,
+  ListItem,
+  ListSelection,
+  ScrollableList,
+  List,
+} from "azure-devops-ui/List";
+import { Spinner, SpinnerSize } from "azure-devops-ui/Spinner";
+import { ArrayItemProvider } from "azure-devops-ui/Utilities/Provider";
+import { Icon, IconSize } from "azure-devops-ui/Icon";
+import { assaData } from "./data";
+import {
+  AssaResult,
+  ComplianceCount,
+  ComplianceData,
+  ThreadEventScore,
+} from "../../type/AssaResult";
 const JSON_ATTACHMENT_TYPE = "JSON_ATTACHMENT_TYPE";
 
-class AssaReportContent extends React.Component<{}, {}> {
+const responsibleStatusColumns = [
+  {
+    columnLayout: TableColumnLayout.singleLinePrefix,
+    id: "responsible",
+    name: "Responsible",
+    readonly: true,
+    SortOrder: 0,
+    renderCell: renderSimpleCell,
+    width: new ObservableValue(-25),
+  },
+  {
+    id: "C",
+    name: "C",
+    readonly: true,
+    renderCell: renderSimpleCell,
+    width: new ObservableValue(-15),
+  },
+  {
+    id: "NC",
+    name: "NC",
+    readonly: true,
+    renderCell: renderSimpleCell,
+    width: new ObservableValue(-15),
+  },
+  {
+    id: "PC",
+    name: "PC",
+    readonly: true,
+    renderCell: renderSimpleCell,
+    width: new ObservableValue(-15),
+  },
+  {
+    id: "NA",
+    name: "NA",
+    readonly: true,
+    renderCell: renderSimpleCell,
+    width: new ObservableValue(-15),
+  },
+  {
+    id: "IP",
+    name: "IP",
+    readonly: true,
+    renderCell: renderSimpleCell,
+    width: new ObservableValue(-15),
+  },
+];
+
+interface IResponsibleStatusTableItem extends ISimpleTableCell {
+  responsible: string;
+  C: string;
+  NC: string;
+  PC: string;
+  NA: string;
+  IP: string;
+}
+
+interface ITaskItem {
+  description: string;
+  iconName: string;
+  name: string;
+}
+
+const tasks: ITaskItem[] = [
+  {
+    description: "Build, test, package, or publish a dotnet application",
+    iconName: "Home",
+    name: ".NET Core",
+  },
+  {
+    description:
+      "Acquires a specific version of .NET Core from internal installer",
+    iconName: "Phone",
+    name: ".NET Core Tool Installer",
+  },
+  {
+    description: "Sign and align Android APK Files",
+    iconName: "Lock",
+    name: "Android Signing",
+  },
+  {
+    description: "Distribute app builds to testers and users via AppCenter",
+    iconName: "Globe",
+    name: "App Center Distribute",
+  },
+  {
+    description: "Test app packages with App Center",
+    iconName: "Home",
+    name: "App Center Test",
+  },
+  {
+    description: "Archive files using compression formats",
+    iconName: "Phone",
+    name: "Archive Files",
+  },
+  {
+    description: "Update Azure App Services on Windows, Web Applications, etc.",
+    iconName: "Lock",
+    name: "Azure App Service Deploy",
+  },
+];
+
+interface IAssaReportContentState {
+  mandatory?: boolean;
+  assaPageData?: AssaResult;
+}
+
+class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = { mandatory: false };
+  }
+
   public componentDidMount() {
     // SDK.init();
     // this.buildResult();
+    this.setState({ assaPageData: assaData });
   }
 
   // private async buildResult() {
@@ -65,7 +208,184 @@ class AssaReportContent extends React.Component<{}, {}> {
   //   console.log(timeline);
   // }
 
+  private renderRow = (
+    index: number,
+    item: ITaskItem,
+    details: IListItemDetails<ITaskItem>,
+    key?: string
+  ): JSX.Element => {
+    return (
+      <ListItem
+        key={key || "list-item" + index}
+        index={index}
+        details={details}
+      >
+        <div className="list-example-row flex-row h-scroll-hidden">
+          <Icon iconName={item.iconName} size={IconSize.medium} />
+          <div
+            style={{ marginLeft: "10px", padding: "10px 0px" }}
+            className="flex-column h-scroll-hidden"
+          >
+            <span className="wrap-text">{item.name}</span>
+            <span className="fontSizeMS font-size-ms secondary-text wrap-text">
+              {item.description}
+            </span>
+          </div>
+        </div>
+      </ListItem>
+    );
+  };
+
+  private renderScoreRow = (
+    index: number,
+    item: ThreadEventScore,
+    details: IListItemDetails<ThreadEventScore>,
+    key?: string
+  ): JSX.Element => {
+    const totalCount = item.data.map((t) => t.count).reduce((a, b) => a + b, 0);
+    return (
+      <ListItem
+        key={key || "list-item" + index}
+        index={index}
+        details={details}
+      >
+        <div className="list-example-row flex-row h-scroll-hidden">
+          <div
+            style={{ marginLeft: "10px", padding: "10px 0px" }}
+            className="flex-column h-scroll-hidden"
+          >
+            <div
+              style={{ width: 800 }}
+              className="flex-row justify-space-between"
+            >
+              <span className="wrap-text">{item.threadEvent}</span>
+              <span className="wrap-text">{Math.round(item.score * 100)}%</span>
+            </div>
+            <Bar
+              data={[
+                {
+                  color: "#10b981",
+                  percent:
+                    (item.data.find((t) => t.status === "C")?.count ?? 0) * 100 /
+                    totalCount,
+                },
+                {
+                  color: "#ef4444",
+                  percent:
+                    (item.data.find((t) => t.status === "NC")?.count ?? 0) * 100 /
+                    totalCount,
+                },
+                {
+                  color: "#f59e0b",
+                  percent:
+                    (item.data.find((t) => t.status === "PC")?.count ?? 0) * 100 /
+                    totalCount,
+                },
+                {
+                  color: "#6b7280",
+                  percent:
+                    (item.data.find((t) => t.status === "NA")?.count ?? 0) * 100 /
+                    totalCount,
+                },
+                {
+                  color: "#0ea5e9",
+                  percent:
+                    (item.data.find((t) => t.status === "IP")?.count ?? 0) * 100 /
+                    totalCount,
+                },
+              ]}
+            />
+          </div>
+        </div>
+      </ListItem>
+    );
+  };
+
+  private getSatausOverviewData = (
+    complianceData: ComplianceData[]
+  ): ComplianceCount[] => {
+    let result: ComplianceCount[] = [
+      { status: "C", count: 0 },
+      { status: "NC", count: 0 },
+      { status: "PC", count: 0 },
+      { status: "NA", count: 0 },
+      { status: "IP", count: 0 },
+    ];
+    complianceData.forEach((t) => {
+      t.data.forEach((f) => {
+        let item = result.find((r) => r.status === f.status);
+        if (item) item.count = item.count + f.count;
+      });
+    });
+
+    return result;
+  };
+
+  private getStatusByResponsibleData = (
+    compliancedata: ComplianceData[]
+  ): ComplianceData[] => {
+    let groups = new Map();
+    compliancedata.forEach((item) => {
+      let gpItem: ComplianceCount[] = groups.get(item.responsible);
+      if (gpItem) {
+        item.data.forEach((t) => {
+          var i = gpItem.find((g) => g.status === t.status);
+          if (i) {
+            i.count = i.count + t.count;
+          } else {
+            gpItem.push({ ...t });
+          }
+        });
+      } else {
+        gpItem = item.data.map((t) => ({ status: t.status, count: t.count }));
+      }
+      groups.set(item.responsible, gpItem);
+    });
+
+    const result: ComplianceData[] = [...groups].map(([name, value]) => ({
+      responsible: name,
+      mandatory: true,
+      data: value,
+    }));
+
+    return result;
+  };
+
   public render(): JSX.Element {
+    const { assaPageData, mandatory } = this.state;
+    const complianceData =
+      assaPageData?.complianceData.filter(
+        (t) => this.state.mandatory === false || t.mandatory === true
+      ) ?? [];
+    const satausOverviewData = this.getSatausOverviewData(complianceData);
+    const responsibleComplianceData =
+      this.getStatusByResponsibleData(complianceData);
+
+    const responsibleStatusTableData =
+      new ArrayItemProvider<IResponsibleStatusTableItem>(
+        responsibleComplianceData.map((item) => {
+          const newItem: IResponsibleStatusTableItem = {
+            responsible: item.responsible,
+            C: (
+              item.data.find((t) => t.status === "C")?.count ?? ""
+            ).toString(),
+            NC: (
+              item.data.find((t) => t.status === "NC")?.count ?? ""
+            ).toString(),
+            PC: (
+              item.data.find((t) => t.status === "PC")?.count ?? ""
+            ).toString(),
+            NA: (
+              item.data.find((t) => t.status === "NA")?.count ?? ""
+            ).toString(),
+            IP: (
+              item.data.find((t) => t.status === "IP")?.count ?? ""
+            ).toString(),
+          };
+          return newItem;
+        })
+      );
+
     const iframeUrl = window.location.href;
     const isV2 = window.location.search.indexOf("v2=true") >= 0;
     const data = [
@@ -77,33 +397,90 @@ class AssaReportContent extends React.Component<{}, {}> {
     ];
     return (
       <Page className="sample-hub flex-grow">
-        <Header
-          title={"ABC Sample hub" + (isV2 ? " (version 2)" : "")}
-          titleSize={TitleSize.Large}
-        >
+        <Header title="ASSA Compliance Overview" titleSize={TitleSize.Large}>
           <Toggle
             offText={"All"}
             onText={"Mandatory"}
-            // checked={firstToggle}
-            // onChange={(event, value) => (firstToggle.value = value)}
+            checked={mandatory}
+            onChange={(event, value) => this.setState({ mandatory: value })}
           />
         </Header>
-        <div className="page-content">
-          <p>Feature ABC page</p>
-          <p>iframe url: {iframeUrl}</p>
-          <div style={{ width: "20rem" }}>
-            <Bar data={data} />
+        {assaPageData && (
+          <div className="page-content margin-top-16">
+            <Card
+              className="flex-grow"
+              titleProps={{ text: "Status overview", ariaLevel: 3 }}
+            >
+              <div className="flex-row" style={{ flexWrap: "wrap" }}>
+                {satausOverviewData.map((item, index) => (
+                  <div
+                    className="flex-column"
+                    style={{ minWidth: "120px" }}
+                    key={index}
+                  >
+                    <div
+                      className={`body-m secondary-text font-weight-semibold color-${item.status}`}
+                    >
+                      {item.status}
+                    </div>
+                    <div className="body-m primary-text">{item.count}</div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+            <Card
+              className="flex-grow margin-top-16"
+              titleProps={{
+                text: "Status overview by responsible",
+                ariaLevel: 3,
+              }}
+            >
+              <Table
+                ariaLabel="Basic Table"
+                columns={responsibleStatusColumns}
+                itemProvider={responsibleStatusTableData}
+                role="table"
+                containerClassName="h-scroll-auto"
+              />
+            </Card>
+            <Card
+              titleProps={{
+                text: "Thread event scores",
+                ariaLevel: 3,
+              }}
+            >
+              <List
+                itemProvider={
+                  new ArrayItemProvider(assaPageData.threadEventScores)
+                }
+                renderRow={this.renderScoreRow}
+                selection={new ListSelection(true)}
+                width="100%"
+              />
+            </Card>
+            <Card
+              titleProps={{
+                text: "Controls to compliance",
+                ariaLevel: 3,
+              }}
+            >
+              <div style={{ display: "flex", height: "500px" }}>
+                <ScrollableList
+                  itemProvider={new ArrayItemProvider(tasks)}
+                  renderRow={this.renderRow}
+                  selection={new ListSelection(true)}
+                  width="100%"
+                />
+              </div>
+            </Card>
+            <p>iframe url: {iframeUrl}</p>
           </div>
-          <Card className="flex-grow">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Card>
-        </div>
+        )}
+        {!assaPageData && (
+          <div className="flex-row">
+            <Spinner size={SpinnerSize.large} />
+          </div>
+        )}
       </Page>
     );
   }
@@ -113,13 +490,14 @@ const Bar = ({ data }: { data: { color: string; percent: number }[] }) => {
   return (
     <div className="BarChart">
       {data &&
-        data.map((d) => {
+        data.map((d,index) => {
           return (
             <div
+              key={`bar-${d.percent}-${index}`}
               className="BarData"
               style={{ background: `${d.color}`, width: `${d.percent}%` }}
             >
-              <p className="PercentText">{d.percent + "%"}</p>
+              {/* <p className="PercentText">{d.percent + "%"}</p> */}
             </div>
           );
         })}

@@ -1,4 +1,4 @@
-import tl = require("azure-pipelines-task-lib/task");
+// import tl = require("azure-pipelines-task-lib/task");
 import * as fs from "fs";
 import * as path from "path";
 
@@ -33,7 +33,7 @@ function enrichAssaData(data: Assa): Assa {
     t.mandatory = controlDefinition?.mandatory ?? true;
     t.ref = controlDefinition?.ref ?? null;
     if (!t.status) {
-      t.status = Status.IP;
+      t.status = "IP";
     }
   });
   return data;
@@ -81,7 +81,7 @@ function getThreadEventScore(controls: Control[]): ThreadEventScore[] {
           relevantControls.findIndex(
             (c) =>
               c.ref === m.controlRef &&
-              (c.status === Status.C || c.status === Status.Na)
+              (c.status === "C" || c.status === "NA")
           ) > -1
       )
       .map((m) => m.score)
@@ -106,7 +106,7 @@ function generateAssaResport(data: Assa): AssaResult {
     owner: data.owner,
     status: data.status,
     ncControls: data.controls.filter(
-      (t) => t.status !== Status.C && t.status !== Status.Na
+      (t) => t.status !== "C" && t.status !== "NA"
     ),
     complianceData: getComplianceData(data),
     threadEventScores: getThreadEventScore(data.controls),
@@ -115,8 +115,8 @@ function generateAssaResport(data: Assa): AssaResult {
 }
 
 function run() {
-  const assaPath = tl.getPathInput("assaPath", true);
-  // const assaPath = "assa.yml"
+  // const assaPath = tl.getPathInput("assaPath", true);
+  const assaPath = "assa.yml"
   let assaData = yaml.load(fs.readFileSync(assaPath!, "utf8")) as Assa;
   assaData = enrichAssaData(assaData);
 
@@ -124,14 +124,14 @@ function run() {
 
   console.log(JSON.stringify(assaPageData));
 
-  const agentTempDirectory = tl.getVariable("Agent.TempDirectory");
-  const jsonReportFullPath = path.join(agentTempDirectory!, `assa.log`);
+  // const agentTempDirectory = tl.getVariable("Agent.TempDirectory");
+  // const jsonReportFullPath = path.join(agentTempDirectory!, `assa.log`);
 
-  tl.writeFile(jsonReportFullPath, "I am assaer.");
-  var log = fs.readFileSync(jsonReportFullPath, "utf8");
-  console.log(log);
+  // tl.writeFile(jsonReportFullPath, "I am assaer.");
+  // var log = fs.readFileSync(jsonReportFullPath, "utf8");
+  // console.log(log);
 
-  tl.addAttachment("JSON_ATTACHMENT_TYPE", "assa.log", jsonReportFullPath);
+  // tl.addAttachment("JSON_ATTACHMENT_TYPE", "assa.log", jsonReportFullPath);
 }
 
 run();
