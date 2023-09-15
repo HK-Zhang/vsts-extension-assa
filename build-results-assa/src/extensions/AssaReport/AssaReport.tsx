@@ -24,9 +24,7 @@ import {
 import { showRootComponent } from "../Common";
 import { Toggle } from "azure-devops-ui/Toggle";
 import "./AssaReport.scss";
-import {
-  ObservableValue,
-} from "azure-devops-ui/Core/Observable";
+import { ObservableValue } from "azure-devops-ui/Core/Observable";
 import {
   IListItemDetails,
   ListItem,
@@ -387,19 +385,23 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
 
     return (
       <Page className="sample-hub flex-grow">
-        <Header title="ASSA Compliance Overview" titleSize={TitleSize.Large}>
-          <Toggle
-            offText={"All"}
-            onText={"Mandatory"}
-            checked={mandatory}
-            onChange={(event, value) => this.setState({ mandatory: value })}
-          />
-        </Header>
         {assaPageData && (
           <div className="page-content margin-top-16">
             <Card
               className="flex-grow"
               titleProps={{ text: "Status overview", ariaLevel: 3 }}
+              headerDescriptionProps={{
+                text: (
+                  <Toggle
+                    offText={"All"}
+                    onText={"Mandatory"}
+                    checked={mandatory}
+                    onChange={(event, value) =>
+                      this.setState({ mandatory: value })
+                    }
+                  />
+                ),
+              }}
             >
               <div className="flex-row" style={{ flexWrap: "wrap" }}>
                 {satausOverviewData.map((item, index) => (
@@ -456,7 +458,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
                 ariaLevel: 3,
               }}
             >
-              <div style={{ display: "flex", height: "500px" }}>
+              <div style={{ display: "flex" }}>
                 <ScrollableList
                   itemProvider={ncControls}
                   renderRow={this.renderRow}
