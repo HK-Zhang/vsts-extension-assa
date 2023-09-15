@@ -13,7 +13,7 @@
     "version": {
         "Major": 2,
         "Minor": 0,
-        "Patch": 69
+        "Patch": 70
     },
     "minimumAgentVersion": "1.99.0",
     "inputs": [
@@ -21,7 +21,6 @@
             "name": "assaPath", 
             "type": "filePath", 
             "label": "ASSA file path", 
-            "defaultValue":"**\\assa.yml", 
             "required":true,
             "helpMarkDown": "Relative path from repo root of the ASSA yml file to run."  
         }
@@ -29,7 +28,7 @@
     "instanceNameFormat": "Read ASSA file",
     "execution": {
         "Node": {
-            "target": "$(currentDirectory)\\ASSAReader.js",
+            "target": "$(currentDirectory)/ASSAReader.js",
             "argumentFormat": "",
             "workingDirectory": "$(currentDirectory)"
         }
