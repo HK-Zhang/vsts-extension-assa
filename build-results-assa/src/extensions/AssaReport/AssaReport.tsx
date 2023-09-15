@@ -6,25 +6,17 @@ import {
   getClient,
 } from "azure-devops-extension-api";
 import {
-  BuildDefinition,
   BuildRestClient,
   IBuildPageDataService,
   BuildServiceIds,
-  IBuildPageData,
 } from "azure-devops-extension-api/Build";
-import { Header, TitleSize } from "azure-devops-ui/Header";
 import { Page } from "azure-devops-ui/Page";
 import { Card } from "azure-devops-ui/Card";
-import {
-  ISimpleTableCell,
-  Table,
-  TableColumnLayout,
-  renderSimpleCell,
-} from "azure-devops-ui/Table";
+import { Table } from "azure-devops-ui/Table";
+import { ZeroData, ZeroDataActionType } from "azure-devops-ui/ZeroData";
 import { showRootComponent } from "../Common";
 import { Toggle } from "azure-devops-ui/Toggle";
 import "./AssaReport.scss";
-import { ObservableValue } from "azure-devops-ui/Core/Observable";
 import {
   IListItemDetails,
   ListItem,
@@ -35,85 +27,16 @@ import {
 import { Spinner, SpinnerSize } from "azure-devops-ui/Spinner";
 import { ArrayItemProvider } from "azure-devops-ui/Utilities/Provider";
 // import { assaData } from "./data";
-import {
-  AssaResult,
-  ComplianceCount,
-  ComplianceData,
-  ThreadEventScore,
-} from "../../type/AssaResult";
+import { ThreadEventScore } from "../../type/AssaResult";
 import { ControlRelevanceTable } from "../../AssaSchema";
-import { Status } from "../../type/Assa";
+import {
+  IAssaReportContentState,
+  IControlItem,
+  IResponsibleStatusTableItem,
+  responsibleStatusColumns,
+} from "./type";
+import { getSatausOverviewData, getStatusByResponsibleData } from "./utils";
 const JSON_ATTACHMENT_TYPE = "JSON_ATTACHMENT_TYPE";
-
-const responsibleStatusColumns = [
-  {
-    columnLayout: TableColumnLayout.singleLinePrefix,
-    id: "responsible",
-    name: "Responsible",
-    readonly: true,
-    SortOrder: 0,
-    renderCell: renderSimpleCell,
-    width: new ObservableValue(-25),
-  },
-  {
-    id: "C",
-    name: "C",
-    readonly: true,
-    renderCell: renderSimpleCell,
-    width: new ObservableValue(-15),
-  },
-  {
-    id: "NC",
-    name: "NC",
-    readonly: true,
-    renderCell: renderSimpleCell,
-    width: new ObservableValue(-15),
-  },
-  {
-    id: "PC",
-    name: "PC",
-    readonly: true,
-    renderCell: renderSimpleCell,
-    width: new ObservableValue(-15),
-  },
-  {
-    id: "NA",
-    name: "NA",
-    readonly: true,
-    renderCell: renderSimpleCell,
-    width: new ObservableValue(-15),
-  },
-  {
-    id: "IP",
-    name: "IP",
-    readonly: true,
-    renderCell: renderSimpleCell,
-    width: new ObservableValue(-15),
-  },
-];
-
-interface IResponsibleStatusTableItem extends ISimpleTableCell {
-  responsible: string;
-  C: string;
-  NC: string;
-  PC: string;
-  NA: string;
-  IP: string;
-}
-
-interface IControlItem {
-  description: string;
-  id: string;
-  status: Status;
-  mandatory: boolean;
-  responsible: string;
-  threadEvent: string[];
-}
-
-interface IAssaReportContentState {
-  mandatory?: boolean;
-  assaPageData?: AssaResult;
-}
 
 class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
   constructor(props: {}) {
@@ -125,6 +48,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
     SDK.init();
     this.buildResult();
     // this.setState({ assaPageData: assaData });
+    // this.setState({ assaNotExist: true });
   }
 
   private async buildResult() {
@@ -148,6 +72,12 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
       buildPageData?.build?.id!,
       JSON_ATTACHMENT_TYPE
     );
+
+    if (attachments.findIndex((t) => t.name === "assa.json") === -1) {
+      this.setState({ assaNotExist: true });
+      return;
+    }
+
     const record = timeline.records.find(
       (t) => t.task && t.task.id === "7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"
     );
@@ -161,8 +91,6 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
     );
 
     const assaStr = new TextDecoder("utf-8").decode(new DataView(content));
-
-    console.log(assaStr);
     this.setState({ assaPageData: JSON.parse(assaStr) });
   }
 
@@ -277,65 +205,15 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
     );
   };
 
-  private getSatausOverviewData = (
-    complianceData: ComplianceData[]
-  ): ComplianceCount[] => {
-    let result: ComplianceCount[] = [
-      { status: "C", count: 0 },
-      { status: "NC", count: 0 },
-      { status: "PC", count: 0 },
-      { status: "NA", count: 0 },
-      { status: "IP", count: 0 },
-    ];
-    complianceData.forEach((t) => {
-      t.data.forEach((f) => {
-        let item = result.find((r) => r.status === f.status);
-        if (item) item.count = item.count + f.count;
-      });
-    });
-
-    return result;
-  };
-
-  private getStatusByResponsibleData = (
-    compliancedata: ComplianceData[]
-  ): ComplianceData[] => {
-    let groups = new Map();
-    compliancedata.forEach((item) => {
-      let gpItem: ComplianceCount[] = groups.get(item.responsible);
-      if (gpItem) {
-        item.data.forEach((t) => {
-          var i = gpItem.find((g) => g.status === t.status);
-          if (i) {
-            i.count = i.count + t.count;
-          } else {
-            gpItem.push({ ...t });
-          }
-        });
-      } else {
-        gpItem = item.data.map((t) => ({ status: t.status, count: t.count }));
-      }
-      groups.set(item.responsible, gpItem);
-    });
-
-    const result: ComplianceData[] = [...groups].map(([name, value]) => ({
-      responsible: name,
-      mandatory: true,
-      data: value,
-    }));
-
-    return result;
-  };
-
   public render(): JSX.Element {
-    const { assaPageData, mandatory } = this.state;
+    const { assaPageData, mandatory, assaNotExist } = this.state;
     const complianceData =
       assaPageData?.complianceData.filter(
         (t) => this.state.mandatory === false || t.mandatory === true
       ) ?? [];
-    const satausOverviewData = this.getSatausOverviewData(complianceData);
+    const satausOverviewData = getSatausOverviewData(complianceData);
     const responsibleComplianceData =
-      this.getStatusByResponsibleData(complianceData);
+      getStatusByResponsibleData(complianceData);
 
     const responsibleStatusTableData =
       new ArrayItemProvider<IResponsibleStatusTableItem>(
@@ -385,7 +263,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
 
     return (
       <Page className="sample-hub flex-grow">
-        {assaPageData && (
+        {assaPageData && !assaNotExist && (
           <div className="page-content margin-top-16">
             <Card
               className="flex-grow"
@@ -469,9 +347,24 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
             </Card>
           </div>
         )}
-        {!assaPageData && (
+        {!assaPageData && !assaNotExist && (
           <div className="flex-row">
             <Spinner size={SpinnerSize.large} />
+          </div>
+        )}
+        {assaNotExist && (
+          <div>
+            <ZeroData
+              primaryText="ASSA report is not found"
+              secondaryText={
+                <span>
+                  Probably it is due to the assa yml file is not properly setup in
+                  the ASSA Reader build pipeline task.
+                </span>
+              }
+              imageAltText="ASSA missing"
+              imagePath="./bars.png"
+            />
           </div>
         )}
       </Page>
