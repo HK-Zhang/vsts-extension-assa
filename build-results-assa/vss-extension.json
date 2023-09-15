@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "assa-build-results-enhancer",
-  "version": "0.0.66",
+  "version": "0.0.68",
   "name": "ASSA Report",
   "description": "A simple extension that demonstrates ASSA summary page.",
   "publisher": "hkzhang",

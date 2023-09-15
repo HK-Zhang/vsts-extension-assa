@@ -1,39 +1,34 @@
 import * as React from "react";
-// import * as SDK from "azure-devops-extension-sdk";
-// import {
-//   CommonServiceIds,
-//   IProjectPageService,
-//   getClient,
-// } from "azure-devops-extension-api";
-// import {
-//   BuildDefinition,
-//   BuildRestClient,
-//   IBuildPageDataService,
-//   BuildServiceIds,
-//   IBuildPageData,
-// } from "azure-devops-extension-api/Build";
+import * as SDK from "azure-devops-extension-sdk";
+import {
+  CommonServiceIds,
+  IProjectPageService,
+  getClient,
+} from "azure-devops-extension-api";
+import {
+  BuildDefinition,
+  BuildRestClient,
+  IBuildPageDataService,
+  BuildServiceIds,
+  IBuildPageData,
+} from "azure-devops-extension-api/Build";
 import { Header, TitleSize } from "azure-devops-ui/Header";
 import { Page } from "azure-devops-ui/Page";
 import { Card } from "azure-devops-ui/Card";
 import {
-  ColumnSorting,
   ISimpleTableCell,
-  SortOrder,
   Table,
   TableColumnLayout,
   renderSimpleCell,
-  sortItems,
 } from "azure-devops-ui/Table";
 import { showRootComponent } from "../Common";
 import { Toggle } from "azure-devops-ui/Toggle";
 import "./AssaReport.scss";
 import {
-  ObservableArray,
   ObservableValue,
 } from "azure-devops-ui/Core/Observable";
 import {
   IListItemDetails,
-  ISimpleListCell,
   ListItem,
   ListSelection,
   ScrollableList,
@@ -41,10 +36,7 @@ import {
 } from "azure-devops-ui/List";
 import { Spinner, SpinnerSize } from "azure-devops-ui/Spinner";
 import { ArrayItemProvider } from "azure-devops-ui/Utilities/Provider";
-import { Icon, IconSize } from "azure-devops-ui/Icon";
-import { Pill, PillSize, PillVariant } from "azure-devops-ui/Pill";
-import { PillGroup } from "azure-devops-ui/PillGroup";
-import { assaData } from "./data";
+// import { assaData } from "./data";
 import {
   AssaResult,
   ComplianceCount,
@@ -132,49 +124,49 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
   }
 
   public componentDidMount() {
-    // SDK.init();
-    // this.buildResult();
-    this.setState({ assaPageData: assaData });
+    SDK.init();
+    this.buildResult();
+    // this.setState({ assaPageData: assaData });
   }
 
-  // private async buildResult() {
-  //   await SDK.ready();
-  //   const projectService = await SDK.getService<IProjectPageService>(
-  //     CommonServiceIds.ProjectPageService
-  //   );
-  //   const project = await projectService.getProject();
-  //   const projectId = project!.id;
-  //   const buildClient = getClient(BuildRestClient);
-  //   const buildPageService: IBuildPageDataService = await SDK.getService(
-  //     BuildServiceIds.BuildPageDataService
-  //   );
-  //   const buildPageData = await buildPageService.getBuildPageData();
-  //   const timeline = await buildClient.getBuildTimeline(
-  //     projectId,
-  //     buildPageData?.build?.id!
-  //   );
-  //   const attachments = await buildClient.getAttachments(
-  //     projectId,
-  //     buildPageData?.build?.id!,
-  //     JSON_ATTACHMENT_TYPE
-  //   );
-  //   const record = timeline.records.find(
-  //     (t) => t.task && t.task.id === "7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"
-  //   );
-  //   const content = await buildClient.getAttachment(
-  //     project?.id!,
-  //     buildPageData?.build?.id!,
-  //     timeline.id,
-  //     record?.id!,
-  //     JSON_ATTACHMENT_TYPE,
-  //     "assa.log"
-  //   );
-  //   console.log(new TextDecoder("utf-8").decode(new DataView(content)));
-  //   console.log(project);
-  //   console.log(buildPageData);
-  //   console.log(attachments);
-  //   console.log(timeline);
-  // }
+  private async buildResult() {
+    await SDK.ready();
+    const projectService = await SDK.getService<IProjectPageService>(
+      CommonServiceIds.ProjectPageService
+    );
+    const project = await projectService.getProject();
+    const projectId = project!.id;
+    const buildClient = getClient(BuildRestClient);
+    const buildPageService: IBuildPageDataService = await SDK.getService(
+      BuildServiceIds.BuildPageDataService
+    );
+    const buildPageData = await buildPageService.getBuildPageData();
+    const timeline = await buildClient.getBuildTimeline(
+      projectId,
+      buildPageData?.build?.id!
+    );
+    const attachments = await buildClient.getAttachments(
+      projectId,
+      buildPageData?.build?.id!,
+      JSON_ATTACHMENT_TYPE
+    );
+    const record = timeline.records.find(
+      (t) => t.task && t.task.id === "7d7d4c9d-845c-423a-a91d-ddf596fe8f6c"
+    );
+    const content = await buildClient.getAttachment(
+      project?.id!,
+      buildPageData?.build?.id!,
+      timeline.id,
+      record?.id!,
+      JSON_ATTACHMENT_TYPE,
+      "assa.json"
+    );
+
+    const assaStr = new TextDecoder("utf-8").decode(new DataView(content));
+
+    console.log(assaStr);
+    this.setState({ assaPageData: JSON.parse(assaStr) });
+  }
 
   private renderRow = (
     index: number,

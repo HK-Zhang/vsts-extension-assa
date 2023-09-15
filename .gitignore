@@ -10,3 +10,4 @@ extension-*.json
 
 #npm log
 npm-debug.log
+build-results-assa/src/extensions/AssaReport/data.ts
