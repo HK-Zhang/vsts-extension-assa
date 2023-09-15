@@ -1,4 +1,5 @@
 import tl = require("azure-pipelines-task-lib/task");
+import ll = require("azure-pipelines-task-lib/internal");
 import * as fs from "fs";
 import * as path from "path";
 
@@ -115,23 +116,38 @@ function generateAssaResport(data: Assa): AssaResult {
 }
 
 function run() {
-  const assaPath = tl.getPathInput("assaPath", true);
-  // const assaPath = "assa.yml"
-  let assaData = yaml.load(fs.readFileSync(assaPath!, "utf8")) as Assa;
-  assaData = enrichAssaData(assaData);
+  try{
+    const assaPath = tl.getPathInput("assaPath", true);
+    // const assaPath = "assa.yml"
 
-  const assaPageData = generateAssaResport(assaData);
+    if (
+      !assaPath ||
+      !assaPath.toLocaleLowerCase().endsWith(".yml") ||
+      !fs.existsSync(assaPath!)
+    ) {
+      ll._error("Assa yml file do not exist.");
+      return;
+    }
+  
+    let assaData = yaml.load(fs.readFileSync(assaPath!, "utf8")) as Assa;
+    assaData = enrichAssaData(assaData);
+  
+    const assaPageData = generateAssaResport(assaData);
+  
+    console.log(JSON.stringify(assaPageData));
+  
+    const agentTempDirectory = tl.getVariable("Agent.TempDirectory");
+    const jsonReportFullPath = path.join(agentTempDirectory!, `assa.json`);
+  
+    tl.writeFile(jsonReportFullPath, JSON.stringify(assaPageData));
+    // var log = fs.readFileSync(jsonReportFullPath, "utf8");
+    tl.addAttachment("JSON_ATTACHMENT_TYPE", "assa.json", jsonReportFullPath);
+    console.log("assa report data is saved.");
+  }
+  catch{
+    tl.setResult(tl.TaskResult.Succeeded, "Completed with error");
+  }
 
-  // console.log(JSON.stringify(assaPageData));
-
-  const agentTempDirectory = tl.getVariable("Agent.TempDirectory");
-  const jsonReportFullPath = path.join(agentTempDirectory!, `assa.json`);
-
-  tl.writeFile(jsonReportFullPath, JSON.stringify(assaPageData));
-  var log = fs.readFileSync(jsonReportFullPath, "utf8");
-  console.log(log);
-
-  tl.addAttachment("JSON_ATTACHMENT_TYPE", "assa.json", jsonReportFullPath);
 }
 
 run();

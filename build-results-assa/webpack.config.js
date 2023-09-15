@@ -61,11 +61,21 @@ module.exports = {
         test: /\.html$/,
         loader: "file-loader",
       },
+      // {
+      //   test: /\.png$/,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: '[name].[ext]'
+      //   }
+      // },
     ],
   },
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [{ from: "**/*.html", context: "src/extensions" }],
+      patterns: [
+        { from: "**/*.html", context: "src/extensions" },
+        { from: "**/*.png", context: "src/extensions" }
+      ],
     }),
   ],
 };
