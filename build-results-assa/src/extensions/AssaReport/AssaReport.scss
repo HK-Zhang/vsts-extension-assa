@@ -1,0 +1,68 @@
+@import "node_modules/azure-devops-ui/Core/_platformCommon.scss";
+
+$c-color: #10b981;
+$na-color: #6b7280;
+$nc-color: #ef4444;
+$ip-color: #0ea5e9;
+$pc-color: #f59e0b;
+
+.color-C {
+    color: $c-color;
+}
+
+.color-NA {
+    color: $na-color;
+}
+
+.color-NC {
+    color: $nc-color;
+}
+
+.color-PC {
+    color: $pc-color;
+}
+
+.color-IP {
+    color: $ip-color;
+}
+
+.border-l-C {
+    border-left: 2px solid $c-color;
+}
+
+.border-l-NA {
+    border-left: 2px solid $na-color;
+}
+
+.border-l-NC {
+    border-left: 2px solid $nc-color;
+}
+
+.border-l-IP {
+    border-left: 2px solid $ip-color;
+}
+
+.border-l-PC {
+    border-left: 2px solid $pc-color;
+}
+
+.BarChart {
+    background-color: #2bc4bd;
+    display: flex;
+    flex-direction: row;
+    height: 2px;
+    width: inherit;
+    overflow: hidden;
+}
+
+.BarData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PercentText {
+    color: #ebeded;
+    font: 1rem;
+    text-align: center;
+}
