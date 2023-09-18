@@ -27,7 +27,7 @@ import {
 import { Spinner, SpinnerSize } from "azure-devops-ui/Spinner";
 import { ArrayItemProvider } from "azure-devops-ui/Utilities/Provider";
 // import { assaData } from "./data";
-import { ThreadEventScore } from "../../type/AssaResult";
+import { ThreatEventScore } from "../../type/AssaResult";
 import { ControlRelevanceTable } from "../../AssaSchema";
 import {
   IAssaReportContentState,
@@ -121,11 +121,11 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
                 {item.responsible}
               </span>
               <span className="fontSizeMS font-size-ms secondary-text wrap-text">
-                {item.threadEvent.length} thread events are impacted.
+                {item.threatEvent.length} threat events are impacted.
               </span>
               {/* <div>
                 <PillGroup className="flex-row">
-                  {item.threadEvent.map((t,idx)=>{<Pill key={`pill-item-${index}-${idx}`} size={PillSize.compact}>{t}</Pill>})}
+                  {item.threatEvent.map((t,idx)=>{<Pill key={`pill-item-${index}-${idx}`} size={PillSize.compact}>{t}</Pill>})}
                 </PillGroup>
               </div> */}
             </div>
@@ -137,8 +137,8 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
 
   private renderScoreRow = (
     index: number,
-    item: ThreadEventScore,
-    details: IListItemDetails<ThreadEventScore>,
+    item: ThreatEventScore,
+    details: IListItemDetails<ThreatEventScore>,
     key?: string
   ): JSX.Element => {
     const totalCount = item.data.map((t) => t.count).reduce((a, b) => a + b, 0);
@@ -157,7 +157,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
               style={{ width: 800 }}
               className="flex-row justify-space-between"
             >
-              <span className="wrap-text">{item.threadEvent}</span>
+              <span className="wrap-text">{item.threatEvent}</span>
               <span className="wrap-text">{Math.round(item.score * 100)}%</span>
             </div>
             <Bar
@@ -250,12 +250,12 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
             description: item.description,
             mandatory: item.mandatory,
             responsible: item.responsible,
-            threadEvent: ControlRelevanceTable.controlRelevance
+            threatEvent: ControlRelevanceTable.controlRelevance
               .filter(
                 (t) =>
                   t.measurement.findIndex((f) => f.controlRef === item.ref) > -1
               )
-              .map((t) => t.threadEvent),
+              .map((t) => t.threatEvent),
           };
           return newItem;
         }) ?? []
@@ -316,13 +316,13 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
             <Card
               className="margin-top-16"
               titleProps={{
-                text: "Thread event scores",
+                text: "Calculated likelihood of threat event initiation",
                 ariaLevel: 3,
               }}
             >
               <List
                 itemProvider={
-                  new ArrayItemProvider(assaPageData.threadEventScores)
+                  new ArrayItemProvider(assaPageData.threatEventScores)
                 }
                 renderRow={this.renderScoreRow}
                 selection={new ListSelection(true)}

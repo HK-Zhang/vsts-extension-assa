@@ -9,7 +9,7 @@ export interface AssaResult {
   status: string;
   complianceData: ComplianceData[];
   ncControls: Control[];
-  threadEventScores:ThreadEventScore[];
+  threatEventScores:ThreatEventScore[];
 }
 
 export interface ComplianceCount {
@@ -23,8 +23,8 @@ export interface ComplianceData {
   data: ComplianceCount[];
 }
 
-export interface ThreadEventScore{
-    threadEvent:string;
+export interface ThreatEventScore{
+    threatEvent:string;
     score:number;
     data: ComplianceCount[];
 }

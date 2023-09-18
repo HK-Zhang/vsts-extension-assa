@@ -9,7 +9,7 @@ import {
   AssaResult,
   ComplianceCount,
   ComplianceData,
-  ThreadEventScore,
+  ThreatEventScore,
 } from "../../type/AssaResult";
 import AssaSchema, { ControlRelevanceTable } from "../../AssaSchema";
 
@@ -68,8 +68,8 @@ function getComplianceData(data: Assa): ComplianceData[] {
   return compliaceReport;
 }
 
-function getThreadEventScore(controls: Control[]): ThreadEventScore[] {
-  let threadEventScores: ThreadEventScore[] = [];
+function getThreatEventScore(controls: Control[]): ThreatEventScore[] {
+  let threatEventScores: ThreatEventScore[] = [];
 
   ControlRelevanceTable.controlRelevance.forEach((t) => {
     const total = t.measurement.map((m) => m.score).reduce((a, c) => a + c, 0);
@@ -88,14 +88,14 @@ function getThreadEventScore(controls: Control[]): ThreadEventScore[] {
       .map((m) => m.score)
       .reduce((a, c) => a + c, 0);
 
-    threadEventScores.push({
-      threadEvent: t.threadEvent,
+    threatEventScores.push({
+      threatEvent: t.threatEvent,
       score: sum / total,
       data: sumByStatus(relevantControls),
     });
   });
 
-  return threadEventScores;
+  return threatEventScores;
 }
 
 function generateAssaResport(data: Assa): AssaResult {
@@ -110,7 +110,7 @@ function generateAssaResport(data: Assa): AssaResult {
       (t) => t.status !== "C" && t.status !== "NA"
     ),
     complianceData: getComplianceData(data),
-    threadEventScores: getThreadEventScore(data.controls),
+    threatEventScores: getThreatEventScore(data.controls),
   };
   return assaResult;
 }
