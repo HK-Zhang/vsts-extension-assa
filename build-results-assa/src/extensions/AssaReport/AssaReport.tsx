@@ -158,7 +158,7 @@ class AssaReportContent extends React.Component<{}, IAssaReportContentState> {
               className="flex-row justify-space-between"
             >
               <span className="wrap-text">{item.threatEvent}</span>
-              <span className="wrap-text">{Math.round(item.score * 100)}%</span>
+              <span className="wrap-text">{Math.round(100 - item.score * 100)}%</span>
             </div>
             <Bar
               data={[
