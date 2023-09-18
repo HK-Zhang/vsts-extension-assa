@@ -65,7 +65,7 @@ export interface IControlItem {
   status: Status;
   mandatory: boolean;
   responsible: string;
-  threadEvent: string[];
+  threatEvent: string[];
 }
 
 export interface IAssaReportContentState {

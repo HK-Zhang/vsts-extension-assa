@@ -423,7 +423,7 @@ export const ControlRelevanceTable = {
   version: "6.0",
   controlRelevance: [
     {
-      threadEvent: "Session hijacking",
+      threatEvent: "Session hijacking",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -504,7 +504,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent:
+      threatEvent:
         "Unauthorised access to legitimate authentication credentials",
       measurement: [
         {
@@ -674,7 +674,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Unauthorised access to data",
+      threatEvent: "Unauthorised access to data",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -911,7 +911,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Exploit vulnerable authorisation mechanisms",
+      threatEvent: "Exploit vulnerable authorisation mechanisms",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1100,7 +1100,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent:
+      threatEvent:
         "Unauthorised monitoring and/or modification of communications",
       measurement: [
         {
@@ -1162,7 +1162,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Conduct a denial of service (DoS) attack",
+      threatEvent: "Conduct a denial of service (DoS) attack",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1203,7 +1203,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Introduce malware to information systems",
+      threatEvent: "Introduce malware to information systems",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1304,7 +1304,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Exploit misconfigured organisational information systems",
+      threatEvent: "Exploit misconfigured organisational information systems",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1421,7 +1421,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Exploit poorly-designed network architecture",
+      threatEvent: "Exploit poorly-designed network architecture",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1486,7 +1486,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Misuse of information systems",
+      threatEvent: "Misuse of information systems",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1687,7 +1687,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Unauthorised network scanning and/or probing",
+      threatEvent: "Unauthorised network scanning and/or probing",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -1748,7 +1748,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent:
+      threatEvent:
         "Exploit vulnerabilities in an organisation's information systems",
       measurement: [
         {
@@ -1886,7 +1886,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent:
+      threatEvent:
         "Introducing unauthorised code into applications or software",
       measurement: [
         {
@@ -1980,7 +1980,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Loss of information systems",
+      threatEvent: "Loss of information systems",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -2033,7 +2033,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Undesirable effects of change",
+      threatEvent: "Undesirable effects of change",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -2074,7 +2074,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Misconfiguration",
+      threatEvent: "Misconfiguration",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -2171,7 +2171,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Software malfunction",
+      threatEvent: "Software malfunction",
       measurement: [
         {
           controlRef: "1.1.4",
@@ -2272,7 +2272,7 @@ export const ControlRelevanceTable = {
       ],
     },
     {
-      threadEvent: "Compliance violation",
+      threatEvent: "Compliance violation",
       measurement: [
         {
           controlRef: "1.1.3",
